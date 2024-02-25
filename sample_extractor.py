@@ -1,6 +1,6 @@
 import pandas as pd
 
-def sample_csv(input_file: str, output_file: str, sample_fraction: float = 0.003):
+def sample_csv(input_file: str, output_file: str, sample_fraction: float = 0.01):
     # 读取CSV文件
     df = pd.read_csv(input_file)
     
