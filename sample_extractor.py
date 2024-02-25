@@ -1,6 +1,6 @@
 import pandas as pd
 
-def sample_csv(input_file: str, output_file: str, sample_fraction: float = 0.01):
+def sample_csv(input_file: str, output_file: str, sample_fraction: float = 0.05):
     # 读取CSV文件
     df = pd.read_csv(input_file)
     
@@ -12,4 +12,4 @@ def sample_csv(input_file: str, output_file: str, sample_fraction: float = 0.01)
 
 # 调用函数
 # 这里的'input.csv'是您的原始CSV文件路径，'sampled_output.csv'是您想要保存抽样后数据的新CSV文件路径
-sample_csv('2023-12-30 16:51:11.csv', 'sampled_output.csv')
+sample_csv('2023-12-30 16:51:11.csv', 'sampled_output_50k.csv')
