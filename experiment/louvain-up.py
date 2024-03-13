@@ -3,6 +3,7 @@ import pandas as pd
 import networkx as nx
 import community as community_louvain
 from scipy.stats import pearsonr
+import time
 
 # 生成模拟数据集
 np.random.seed()
@@ -43,12 +44,26 @@ def build_network_and_calculate_modularity(df_normalized, weight_function):
 # 执行实验并收集结果
 n_runs = 1
 results = []
+time_results = []
 
 for run in range(1, n_runs + 1):
+    # 原始权重计算方法的时间和模块度
+    start_time = time.time()
     mod_original = build_network_and_calculate_modularity(df_normalized, original_weight)
+    end_time = time.time()
+    original_time = end_time - start_time
+
+    # 改进权重计算方法的时间和模块度
+    start_time = time.time()
     mod_improved = build_network_and_calculate_modularity(df_normalized, improved_weight)
+    end_time = time.time()
+    improved_time = end_time - start_time   
+
+    # 保存结果
     results.append((run, mod_original, mod_improved))
+    time_results.append((run, original_time, improved_time))
 
 # 将结果转换为DataFrame并打印
-results_df = pd.DataFrame(results, columns=['Run', 'Modularity (Original)', 'Modularity (Improved)'])
-print(results_df)
+modularity_df = pd.DataFrame(results, columns=['Run', 'Modularity (Original)', 'Modularity (Improved)'])
+time_df = pd.DataFrame(time_results, columns=['Run', 'Time (Original)', 'Time (Improved)'])
+print(modularity_df,time_df)
